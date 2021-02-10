@@ -41,7 +41,11 @@ public class CLI extends Thread {
                 break;
             }
             case "overlay": {
-                node.overlay(new ArrayList<NodeAddress>());
+                ArrayList<NodeAddress> message = new ArrayList<NodeAddress>();
+                if(node.getNextAddress() == null){
+                    message.add(node.getMyAddress());
+                }
+                node.overlay(message);
                 break;
             }
             case "help": {
