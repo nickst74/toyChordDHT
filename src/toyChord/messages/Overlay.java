@@ -25,5 +25,15 @@ public class Overlay extends Message {
     public ArrayList<NodeAddress> getAddresses() {
         return addresses;
     }
-    
+
+    public boolean contains(NodeAddress addr) {
+        if(this.addresses.contains(addr)){
+            return true;
+        }
+        return false;
+    }
+
+    public void addAddress(NodeAddress addr) {
+        this.addresses.add(addr);
+    }
 }
