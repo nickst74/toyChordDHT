@@ -34,7 +34,7 @@ public class QueryAll extends Message {
                 try {
                     response = response + " " + i.toString() + " with id: " + NodeAddress.sha1(i.getKey()) + "\n";
                 } catch (NoSuchAlgorithmException e) {
-                    // TODO Auto-generated catch block //////////////////////////////////////////////////////////////
+                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }

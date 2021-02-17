@@ -1,48 +1,35 @@
 package toyChord;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
-import toyChord.messages.Delete;
-import toyChord.messages.Insert;
-import toyChord.messages.Overlay;
-import toyChord.messages.Query;
-import toyChord.messages.QueryAll;
+import toyChord.messages.*;
 
 public class CLI extends Thread {
     private Node node;
+    private String userInput;
 
     // Initialize needed variables to run
-    public CLI(Node node) {
+    public CLI(Node node, String s) {
         this.node = node;
+        this.userInput = s;
     }
 
-    // TODO: Maybe we need a client thread to execute commands simultaneously
     @Override
     public void run() {
-        BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-        String input;
-        // Just loop while listening to user input
-        while (true) {
+        if(userInput != null && !userInput.isEmpty()) {
             try {
-                input = stdIn.readLine();
-                if (input != null && !input.isEmpty()) {
-                    execute(input);
-                }
+                execute();
             } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                //TODO: handle exception
             }
         }
     }
 
     /////////// ALL POSSIBLE USER INPUT COMMANDS ///////////
-    private void execute(String userInput)
-            throws UnknownHostException, ClassNotFoundException, IOException, NoSuchAlgorithmException {
+    public void execute() throws UnknownHostException, ClassNotFoundException, NoSuchAlgorithmException, IOException {
         String[] tokens = userInput.split(" ");
         switch(tokens[0]){
             case "depart": {
@@ -90,13 +77,28 @@ public class CLI extends Thread {
                 }
                 break;
             }
+            case "printKR": {
+                System.out.println("My key range is:\nfrom -> "+this.node.getTailLowId()+"\nto -> "+this.node.getTailHighId());
+                break;
+            }
+            case "printAll":{
+                System.out.println("Data in Node:");
+                for(KVPair i : this.node.getData()){
+                    System.out.println(" " + i.toString());
+                }
+                System.out.println("Replicas in Node:");
+                for(KVPair i : this.node.getReplicas()){
+                    System.out.println(" " + i.toString());
+                }
+                break;
+            }
             case "help": {
                 System.out.println("- delete <key> : Delete record with given key from DHT. <key> must a be string wrapped int quotes.\n"+
                                     "- depart : Local node will depart from chord DHT network.\n"+
                                     "- insert <key> <value> : Insert a key-value pair in DHT. Both arguments must be strings wrapped int quotes.\n"+
                                     "- overlay : Returns all nodes connected to the network in the correct order."+
                                     "- query <key> : Search for record of the spesified key in DHT. <key> must a be string wrapped int quotes."+
-                                    " If '*' is given as key, it returns all key-value pairs from all nodes in DHT.\n");
+                                    " If '*' is given as key, it returns all key-value pairs from all nodes in DHT.");
                 break;
             }
             default:{

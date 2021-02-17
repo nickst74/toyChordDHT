@@ -8,9 +8,16 @@ public enum MessageType {
     // update pointers after join/depart
     UPDATE_NEXT,
     UPDATE_PREV,
+    // Messages for key range updates
+    KR_UPDATE_INITIATE,
+    KR_UPDATE,
+    KR_ASK,
+    // ask for data of specific range
+    REPLICA_REQUEST,
+    REPLICA_TRANSFER,
     // transfer data after join/depart
     DATA_TRANSFER,
-    DATA_DEMAND,
+    //DATA_DEMAND,
     // for overlay command
     OVERLAY,
     // Query Message type
@@ -23,4 +30,7 @@ public enum MessageType {
     // Delete Message Type
     DELETE_REQUEST,
     DELETE_RESPONSE,
+    // for replication upon insert and delete
+    ADD_REPLICA,
+    DELETE_REPLICA
 }
