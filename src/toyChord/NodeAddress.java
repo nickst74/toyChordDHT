@@ -13,10 +13,16 @@ public class NodeAddress implements Serializable{
     private int port;
     private String id;
 
-    public NodeAddress(String ip, int port) throws NoSuchAlgorithmException {
+    public NodeAddress(String ip, int port) {
         this.ip = ip;
         this.port = port;
-        this.id = sha1(ip + ':' + String.valueOf(port));
+        try {
+            this.id = sha1(ip + ':' + String.valueOf(port));
+        } catch (Exception e) {
+            //TODO: handle exception
+            e.printStackTrace();
+            System.exit(0);
+        }
     }
 
     public String getIp() {

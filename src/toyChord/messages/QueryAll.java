@@ -1,7 +1,6 @@
 package toyChord.messages;
 
 import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import toyChord.KVPair;
@@ -33,7 +32,7 @@ public class QueryAll extends Message {
             for (KVPair i : this.pairs) {
                 try {
                     response = response + " " + i.toString() + " with id: " + NodeAddress.sha1(i.getKey()) + "\n";
-                } catch (NoSuchAlgorithmException e) {
+                } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }

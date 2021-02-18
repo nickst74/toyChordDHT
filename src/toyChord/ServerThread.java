@@ -15,7 +15,7 @@ public class ServerThread extends Thread {
         this.node = node;
     }
 
-    // TODO: REVERSE ORDER OF OPERATION AND RESPONSE //////// WTF DID I DO O.o //////// or maybe not, RE-EVALUATE APPROACH
+    // TODO: REVERSE ORDER OF OPERATION AND RESPONSE //////// or maybe not, RE-EVALUATE APPROACH
     public void  run() {
         try {
             Message request = null;
@@ -170,7 +170,7 @@ public class ServerThread extends Thread {
                     break;
                 }
                 default: {
-                    System.out.println("Some shit went wrong at recieved message type.");
+                    System.out.println("Something went wrong at recieved message type.");
                 }
             }
             // message exchange completed, close socket

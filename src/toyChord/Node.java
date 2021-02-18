@@ -120,7 +120,7 @@ public class Node {
     }
 
     // Simple function to find local ip (only for 192.168.0.0/16 networks)
-    public String ipDiscovery() throws SocketException {
+    public static String ipDiscovery() throws SocketException {
         Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces();
         while (e.hasMoreElements()) {
             NetworkInterface n = (NetworkInterface) e.nextElement();
@@ -185,6 +185,8 @@ public class Node {
 
     public static void main(String[] args) throws NumberFormatException, NoSuchAlgorithmException, UnknownHostException,
             ClassNotFoundException, IOException {
+        // Printing out the LOGO :D
+        Config.printLogo();
         Node node = null;
         String leaderIp = null;
         int leaderPort = 0;
@@ -460,20 +462,16 @@ public class Node {
             } else if(Config.repType == ConsistencyType.EVENTUAL && hashInRange(this.tailLowId, this.getMyAddress().getId(), hash)){
                 String value = null;
                 this.rl.lock();
-                // if bigger than prev ID check data else check replicas
-                if(hash.compareTo(this.getPrevAddress().getId()) > 0){
-                    for(KVPair p: this.data){
-                        if(p.getKey().equals(message.getKey())){
-                            value = p.getValue();
-                            break;
-                        }
+                for(KVPair p: this.data){
+                    if(p.getKey().equals(message.getKey())){
+                        value = p.getValue();
+                        break;
                     }
-                } else {
-                    for(KVPair p: this.replicas){
-                        if(p.getKey().equals(message.getKey())){
-                            value = p.getValue();
-                            break;
-                        }
+                }
+                for(KVPair p: this.replicas){
+                    if(p.getKey().equals(message.getKey())){
+                        value = p.getValue();
+                        break;
                     }
                 }
                 this.rl.unlock();

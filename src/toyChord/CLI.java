@@ -77,10 +77,12 @@ public class CLI extends Thread {
                 }
                 break;
             }
+            // only used for debugging reasons
             case "printKR": {
                 System.out.println("My key range is:\nfrom -> "+this.node.getTailLowId()+"\nto -> "+this.node.getTailHighId());
                 break;
             }
+            // only used for debugging reasons but can still be usefull so we leave it be
             case "printAll":{
                 System.out.println("Data in Node:");
                 for(KVPair i : this.node.getData()){
