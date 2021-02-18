@@ -418,7 +418,7 @@ public class Node {
         if(message.contains(this.getMyAddress())){
             System.out.println("Chord DHT network overlay starting from me:");
             for(NodeAddress a : message.getAddresses()){
-                System.out.println(a.toString());
+                System.out.println(a.toString() + " with id: " + a.getId());
             }
         } else {
             message.addAddress(this.getMyAddress());
