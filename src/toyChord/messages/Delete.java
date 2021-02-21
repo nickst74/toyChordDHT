@@ -16,6 +16,9 @@ public class Delete extends Message {
     private final NodeAddress origin;
     private NodeAddress responder;
 
+    // TODO : for experiments only
+    private long endTime;
+
     public Delete(NodeAddress addr, String key) {
         this.type = MessageType.DELETE_REQUEST;
         this.key = key;
@@ -26,6 +29,7 @@ public class Delete extends Message {
         this.type = MessageType.DELETE_RESPONSE;
         this.responder = addr;
         this.result = result;
+        this.endTime = System.nanoTime();
     }
 
     public MessageType getType() {
@@ -46,6 +50,10 @@ public class Delete extends Message {
 
     public NodeAddress getResponder() {
         return responder;
+    }
+
+    public long getEndTime() {
+        return endTime;
     }
 
 }

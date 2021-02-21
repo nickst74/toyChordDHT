@@ -16,6 +16,9 @@ public class Query extends Message {
     private final NodeAddress origin;
     private NodeAddress responder;
 
+    // TODO : for experiments only
+    private long endTime;
+
     public MessageType getType() {
         return type;
     }
@@ -48,5 +51,10 @@ public class Query extends Message {
         this.type = MessageType.QUERY_RESPONSE;
         this.responder = addr;
         this.value = value;
+        this.endTime = System.nanoTime();
+    }
+
+    public long getEndTime() {
+        return endTime;
     }
 }

@@ -13,6 +13,8 @@ public class Insert extends Message {
     private KVPair pair;
     private final NodeAddress origin;
     private NodeAddress responder;
+    // TODO : for experiments only
+    private long endTime;
 
     public Insert(NodeAddress addr, KVPair pair) {
         this.type = MessageType.INSERT_REQUEST;
@@ -39,6 +41,11 @@ public class Insert extends Message {
     public void answer(NodeAddress addr) {
         this.type = MessageType.INSERT_RESPONSE;
         this.responder = addr;
+        this.endTime = System.nanoTime();
+    }
+
+    public long getEndTime() {
+        return endTime;
     }
 
 }

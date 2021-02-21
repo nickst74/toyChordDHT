@@ -78,10 +78,10 @@ public class CLI extends Thread {
                 break;
             }
             // only used for debugging reasons
-            case "printKR": {
-                System.out.println("My key range is:\nfrom -> "+this.node.getTailLowId()+"\nto -> "+this.node.getTailHighId());
-                break;
-            }
+            //case "printKR": {
+            //    System.out.println("My key range is:\nfrom -> "+this.node.getTailLowId()+"\nto -> "+this.node.getTailHighId());
+            //    break;
+            //}
             // only used for debugging reasons but can still be usefull so we leave it be
             case "printAll":{
                 System.out.println("Data in Node:");
@@ -98,7 +98,8 @@ public class CLI extends Thread {
                 System.out.println("- delete <key> : Delete record with given key from DHT. <key> must a be string wrapped int quotes.\n"+
                                     "- depart : Local node will depart from chord DHT network.\n"+
                                     "- insert <key> <value> : Insert a key-value pair in DHT. Both arguments must be strings wrapped int quotes.\n"+
-                                    "- overlay : Returns all nodes connected to the network in the correct order."+
+                                    "- overlay : Returns all nodes connected to the network in the correct order.\n"+
+                                    "- printAll : Returns all data and replica that the node contains (for debugging and test reasons).\n"+
                                     "- query <key> : Search for record of the spesified key in DHT. <key> must a be string wrapped int quotes."+
                                     " If '*' is given as key, it returns all key-value pairs from all nodes in DHT.");
                 break;

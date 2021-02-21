@@ -27,13 +27,13 @@ public class DemoThread extends Thread {
                 case INSERT_RESPONSE: {
                     Insert m = (Insert) request;
                     os.writeObject(new OK());
-                    System.out.println(m.getPair().toString() + " inserted. Response from Node : " + m.getResponder().toString());
+                    System.out.println(m.getPair().toString() + " inserted. Response from Node : " + m.getResponder().toString() + " at nsec: " + m.getEndTime());
                     break;
                 }
                 case DELETE_RESPONSE : {
                     Delete m = (Delete) request;
                     os.writeObject(new OK());
-                    System.out.println("\"" + m.getKey() + "\" " + m.getResult() + ". Response from Node : " + m.getResponder().toString());
+                    System.out.println("\"" + m.getKey() + "\" " + m.getResult() + ". Response from Node : " + m.getResponder().toString() + " at nsec: " + m.getEndTime());
                     break;
                 }
                 case QUERY_RESPONSE: {
@@ -45,7 +45,7 @@ public class DemoThread extends Thread {
                     } else {
                         result = "<" + m.getKey() + "," + m.getValue() + "> ";
                     }
-                    System.out.println(result + "Response from Node : " + m.getResponder().toString());
+                    System.out.println(result + "Response from Node : " + m.getResponder().toString() + " at nsec: " + m.getEndTime());
                     break;
                 }
                 default: {
