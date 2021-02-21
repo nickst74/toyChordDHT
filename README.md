@@ -35,3 +35,7 @@ overlay
 
 depart  
 (the node leaves the network and then shuts down)
+
+# Experiments
+
+In order to run the experiments defined in the project requirements we use the files in the "supplementary" folder (the timestamps we take will not work of course in a distributed project due to synchronization issues but we are running it on VMs so it does not matter that much). Three more scripts are also created to automate the process of inserting the key-values pairs from the "insert.txt", querying the keys of the "query.txt", and execute the requests from the "requests.txt" files. One more is being used to delete all key that we inserted in the whole process. To run those 4 programs we first need to define in the "Config.java" file the filepaths for the transaction files, the addresses of the nodes in the network (from those addresses we pick one randomly every time to execute a transaction in those 4 programs), along with the replication factor (number of replicas for every key-value pair), along with the replication strategy that implements leniarizability or eventual consistency (linearizability uses chain replication). Then we need to recompile the project of course.
