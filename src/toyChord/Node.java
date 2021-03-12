@@ -499,9 +499,13 @@ public class Node {
             System.out.println("Chord DHT contains:");
             System.out.print(message.toString());
         } else {
+            // send all data and replicas, make no exception (no need to set them appart)
+            ArrayList<KVPair> toSend = new ArrayList<KVPair>();
             this.rl.lock();
-            message.addAddrData(this.myAddress, this.data);
+            toSend.addAll(this.data);
+            toSend.addAll(this.replicas);
             this.rl.unlock();
+            message.addAddrData(this.myAddress, toSend);
             sendDemoMessage(this.nextAddress, message);
         }
     }
