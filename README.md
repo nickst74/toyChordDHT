@@ -1,5 +1,15 @@
 # toyChordDHT
 
+A peer-to-peer Distributed Hash Table implementation in Java, based on a simplified version of the [Chord DHT](https://en.wikipedia.org/wiki/Chord_(peer-to-peer)). The system designed to store, delete and query key-value pairs on a cluster of computers (also defined as "nodes"). Every node in the network will store the values for all the keys for which it is responsible. The way a key is assigned to a node is specified through the use of a Hash function (there are other ways available too), in order to achieve load balancing.
+
+Every node is aware of his previous and next node in the sequence (like a Ring Network topology), while every transaction he receives is either handle by him (if possible), or forwarded to the next node. Consequently all of the transactions can start from any point of the network and are always forwarded towards the same direction.
+
+Any new node can join the network, while an existing one can depart at any time (Byzantine failures are not considered yet), without the loss of any existing data stored. The system also supports the existence of replicas in multiple nodes of the network, and the data consistency type can be set to either linearizability or eventual consistency. Both of the options can be defined in the [config file](https://github.com/nickst74/toyChordDHT/blob/main/src/toyChord/config/Config.java).
+
+More information regarding the system's operations and the conducted experiments can be found in the [report](https://github.com/nickst74/toyChordDHT/blob/main/report.pdf).
+
+# Instructions
+
 At first run the **compile.sh** script to compile the project.  
 ./compile.sh
 
